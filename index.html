@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora do Remédio💊</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <h1>Organizador de Remédios</h1>
+
+        <form id="remedio-form">
+            <input type="text" id="nome-remedio" placeholder="nome do remedio" required>
+            <select id="periodo">
+                <option value="manhã">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+            </select>
+            <input type="time" id="hora-exata" required>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <h2>Lista de Remédios</h2>
+        <ul id="lista-remedios"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
