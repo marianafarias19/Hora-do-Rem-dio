@@ -6,6 +6,10 @@ const horaExata = document.getElementById("hora-exata");
 
 let remedios = JSON.parse(localStorage.getItem("remedios")) || [];
 
+if (Notification.permission !== "granted") {
+  Notification.requestPermission();
+}
+
 function salvar() {
   localStorage.setItem("remedios", JSON.stringify(remedios));
 }
@@ -18,30 +22,33 @@ function renderizar() {
   lista.innerHTML = "";
   const periodos = ["manhã", "tarde", "noite"];
 
-  periodos.forEach(periodoAtual => {
+  const dataSelecionada = document.getElementById("filtro-data").value || getHoje();
+
+  periodos.forEach(p => {
     const header = document.createElement("h3");
-    header.textContent = periodoAtual.charAt(0).toUpperCase() + periodoAtual.slice(1);
+    header.textContent = p.charAt(0).toUpperCase() + p.slice(1);
     lista.appendChild(header);
 
     remedios
-      .map((remedio, index) => ({ ...remedio, index }))
-      .filter(r => r.horario === periodoAtual && r.data === getHoje())
-      .forEach((remedio) => {
-        const li = document.createElement("li");
-        li.className = remedio.tomado ? "tomado" : "";
-        li.innerHTML = `
-          <span>${remedio.nome} - ${remedio.horaExata}</span>
-          <div>
-            <button onclick="toggleTomado(${remedio.index})">
-              ${remedio.tomado ? "Desmarcar" : "Tomado"}
-            </button>
-            <button onclick="removerRemedio(${remedio.index})" style="background-color: red;">
-              Remover
-            </button>
-          </div>
-        `;
-        lista.appendChild(li);
-      });
+  .map((r, i) => ({ ...r, index: i })) // inclui o índice original
+  .filter(r => r.horario === p && r.data === dataSelecionada)
+  .forEach(remedio => {
+    const li = document.createElement("li");
+    li.className = remedio.tomado ? "tomado" : "";
+    li.innerHTML = `
+      <span>${remedio.nome} - ${remedio.horaExata}</span>
+      <div>
+        <button onclick="toggleTomado(${remedio.index})" ${remedio.data !== getHoje() ? "disabled" : ""}>
+          ${remedio.tomado ? "Desmarcar" : "Tomado"}
+        </button>
+        <button onclick="removerRemedio(${remedio.index})" style="background-color: red;" ${remedio.data !== getHoje() ? "disabled" : ""}>
+          Remover
+        </button>
+      </div>
+    `;
+    lista.appendChild(li);
+  });
+
   });
 }
 
@@ -89,7 +96,12 @@ function verificarNotificacoes() {
       !remedio.tomado &&
       remedio.data === getHoje()
     ) {
-      alert(`Lembrete: está na hora de tomar o remédio "${remedio.nome}"`);
+     if (Notification.permission === "granted") {
+      new Notification("Lembrete de Remédio💊", {
+        body: `Hora de tomar: ${remedio.nome}`,
+        icon: "https://cdn-icons-png.flaticon.com/512/2947/2947898.png",
+      });
+     }
     }
   });
 }
@@ -97,3 +109,7 @@ function verificarNotificacoes() {
 setInterval(verificarNotificacoes, 60000); // verifica a cada minuto
 
 renderizar();
+
+const filtroData = document.getElementById("filtro-data");
+filtroData.value = getHoje();
+filtroData.addEventListener("change", renderizar);
