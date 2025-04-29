@@ -6,6 +6,18 @@ const horaExata = document.getElementById("hora-exata");
 
 let remedios = JSON.parse(localStorage.getItem("remedios")) || [];
 
+const themeToggle = document.getElementById("theme-toggle");
+const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+document.body.classList.toggle("dark", currentTheme === "dark");
+themeToggle.textContent = currentTheme === "dark" ? "☀️ Modo Claro" : "🌓 Modo Escuro";
+
+themeToggle.addEventListener("click", () => {
+  const isDark = document.body.classList.toggle("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  themeToggle.textContent = isDark ? "☀️ Modo Claro" : "🌓 Modo Escuro";
+});
+
 if (Notification.permission !== "granted") {
   Notification.requestPermission();
 }

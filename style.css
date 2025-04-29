@@ -1,62 +1,102 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f4f4;
+/* Variáveis de tema */
+:root {
+    --bg: #f2f2f2;
+    --text: #000;
+    --card-bg: #fff;
+    --border: #eee;
+    --btn-bg: #28a745;
+    --btn-text: #fff;
+    --danger-bg: #dc3545;
+  }
+  
+  body.dark {
+    --bg: #121212;
+    --text: #e0e0e0;
+    --card-bg: #1e1e1e;
+    --border: #333;
+    --btn-bg: #006400;
+    --btn-text: #fff;
+    --danger-bg: #8b0000;
+  }
+  
+  body {
+    background: var(--bg);
+    color: var(--text);
     margin: 0;
     padding: 0;
-}
-
-.container {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
     max-width: 500px;
     margin: 40px auto;
-    background: #fff;
+    background: var(--card-bg);
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(27, 26, 26, 0.1);
-}
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
 
-h1, h2, h3 {
+  h1, h2, h3 {
     text-align: center;
-}
-
-form {
+  }
+  
+  form {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="time"],
-select {
+  }
+  
+  input[type="text"],
+  input[type="time"],
+  select {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 8px;
-}
-
-button {
+    background: var(--card-bg);
+    color: var(--text);
+  }
+  
+  button {
     padding: 10px 15px;
     border: none;
-    background-color: #28a745;
-    color: #fff;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
     border-radius: 8px;
     cursor: pointer;
-}
-
-ul {
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  button.danger {
+    background-color: var(--danger-bg);
+  }
+  
+  ul {
     list-style: none;
     padding: 0;
-}
-
-li {
+  }
+  
+  li {
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-li.tomado {
+  }
+  
+  li.tomado {
     text-decoration: line-through;
     color: gray;
-}
+  }
+  
+  /* Estilo do switcher */
+  .theme-switcher {
+    text-align: right;
+    padding: 10px 20px;
+    background: var(--card-bg);
+  }
+  
