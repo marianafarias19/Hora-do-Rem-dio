@@ -125,3 +125,74 @@ renderizar();
 const filtroData = document.getElementById("filtro-data");
 filtroData.value = getHoje();
 filtroData.addEventListener("change", renderizar);
+
+function mostrarHoje() {
+  document.getElementById("tela-hoje").style.display = "block";
+  document.getElementById("tela-historico").style.display = "none";
+  renderizar(); // atualiza a tela atual
+}
+
+function mostrarHistorico() {
+  document.getElementById("tela-hoje").style.display = "none";
+  document.getElementById("tela-historico").style.display = "block";
+  renderizarHistorico(); // nova função abaixo
+}
+
+
+function renderizarHistorico() {
+  const div = document.getElementById("lista-historico");
+  div.innerHTML = "";
+
+  const datas = [...new Set(remedios.map(r => r.data))].sort().reverse();
+
+  datas.forEach(data => {
+    const titulo = document.createElement("h3");
+    titulo.textContent = `📅 ${data}`;
+    div.appendChild(titulo);
+
+    const ul = document.createElement("ul");
+    remedios
+      .filter(r => r.data === data)
+      .forEach(r => {
+        const li = document.createElement("li");
+        li.innerHTML = `<span>${r.nome} - ${r.horario} - ${r.horaExata} - ${r.tomado ? "✅ Tomado" : "❌ Não tomado"}</span>`;
+        ul.appendChild(li);
+      });
+    div.appendChild(ul);
+  });
+}
+
+mostrarHoje();
+
+let editandoIndex = null;
+
+const editarForm = document.getElementById("editar-form");
+const editarNome = document.getElementById("editar-nome");
+const editarPeriodo = document.getElementById("editar-periodo");
+const editarHora = document.getElementById("editar-hora");
+
+function editarRemedio(index) {
+  const r = remedios[index];
+  editarNome.value = r.nome;
+  editarPeriodo.value = r.horario;
+  editarHora.value = r.horaExata;
+  editarForm.style.display = "block";
+  form.style.display = "none";
+  editandoIndex = index;
+}
+
+function cancelarEdicao() {
+  editarForm.style.display = "none";
+  form.style.display = "block";
+  editandoIndex = null;
+}
+
+editarForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  remedios[editandoIndex].nome = editarNome.value;
+  remedios[editandoIndex].horario = editarPeriodo.value;
+  remedios[editandoIndex].horaExata = editarHora.value;
+  salvar();
+  renderizar();
+  cancelarEdicao();
+});
