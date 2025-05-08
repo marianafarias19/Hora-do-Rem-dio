@@ -10,12 +10,12 @@ const themeToggle = document.getElementById("theme-toggle");
 const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 
 document.body.classList.toggle("dark", currentTheme === "dark");
-themeToggle.textContent = currentTheme === "dark" ? "☀️ Modo Claro" : "🌓 Modo Escuro";
+themeToggle.textContent = currentTheme === "dark" ? " Modo Claro" : " Modo Escuro";
 
 themeToggle.addEventListener("click", () => {
   const isDark = document.body.classList.toggle("dark");
   localStorage.setItem("theme", isDark ? "dark" : "light");
-  themeToggle.textContent = isDark ? "☀️ Modo Claro" : "🌓 Modo Escuro";
+  themeToggle.textContent = isDark ? " Modo Claro" : " Modo Escuro";
 });
 
 if (Notification.permission !== "granted") {
@@ -118,7 +118,7 @@ function verificarNotificacoes() {
   });
 }
 
-setInterval(verificarNotificacoes, 60000); // verifica a cada minuto
+setInterval(verificarNotificacoes, 60000);
 
 renderizar();
 
@@ -129,13 +129,13 @@ filtroData.addEventListener("change", renderizar);
 function mostrarHoje() {
   document.getElementById("tela-hoje").style.display = "block";
   document.getElementById("tela-historico").style.display = "none";
-  renderizar(); // atualiza a tela atual
+  renderizar(); 
 }
 
 function mostrarHistorico() {
   document.getElementById("tela-hoje").style.display = "none";
   document.getElementById("tela-historico").style.display = "block";
-  renderizarHistorico(); // nova função abaixo
+  renderizarHistorico(); 
 }
 
 

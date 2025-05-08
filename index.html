@@ -3,57 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hora do Remédio💊</title>
+    <title>Hora do Remédio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="theme-switcher">
-        <button id="theme-toggle">Modo escuro🌓</button>
-    </div>
+    <nav class="menu">
+        <h2>Hora do Remédio 💊</h2>
+            <button id="theme-toggle">
+                <i class="fas fa-moon"></i> Modo Escuro
+            </button>
+      </nav>
 
     <div class="container">
-        
         <h1>Organizador de Remédios</h1>
 
         <div style="margin-bottom: 10px;">
-            <button onclick="mostrarHoje()">Hoje📅</button>
-            <button onclick="mostrarHistorico()">Histórico📖</button>
+            <button onclick="mostrarHoje()"><i class="fas fa-calendar-day"></i> Hoje</button>
+            <button onclick="mostrarHistorico()"><i class="fas fa-book-open"></i> Histórico</button>
         </div>
 
         <div id="tela-hoje">
+            <label for="filtro-data">Selecionar data:</label>
             <input type="date" id="filtro-data">
             <ul id="lista-remedios"></ul>
+
+            <form id="remedio-form">
+                <input type="text" id="nome-remedio" placeholder="Nome do remédio" required>
+                <select id="periodo">
+                    <option value="manhã">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                </select>
+                <input type="time" id="hora-exata" required>
+                <button type="submit"><i class="fas fa-plus"></i> Adicionar</button>
+            </form>
+
+            <form id="editar-form" style="display: none;">
+                <h3><i class="fas fa-edit"></i> Editar Remédio</h3>
+                <input type="text" id="editar-nome" placeholder="Nome do remédio" required />
+                <select id="editar-periodo">
+                    <option value="manhã">Manhã</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noite">Noite</option>
+                </select>
+                <input type="time" id="editar-hora" required />
+                <button type="submit"><i class="fas fa-save"></i> Salvar</button>
+                <button type="button" onclick="cancelarEdicao()"><i class="fas fa-times"></i> Cancelar</button>
+            </form>
         </div>
 
-        <form id="remedio-form">
-            <input type="text" id="nome-remedio" placeholder="nome do remedio" required>
-            <select id="periodo">
-                <option value="manhã">Manhã</option>
-                <option value="tarde">Tarde</option>
-                <option value="noite">Noite</option>
-            </select>
-            <input type="time" id="hora-exata" required>
-            <button type="submit">Adicionar</button>
-        </form>
-
-   <form id="editar-form" style="display: none;">
-    <h3>Editar Remédio</h3>
-    <input type="text" id="editar-nome" placeholder="Nome do remédio" required />
-    <select id="editar-periodo">
-      <option value="manhã">Manhã</option>
-      <option value="tarde">Tarde</option>
-      <option value="noite">Noite</option>
-    </select>
-    <input type="time" id="editar-hora" required />
-    <button type="submit">Salvar</button>
-    <button type="button" onclick="cancelarEdicao()">Cancelar</button>
-    </form>
-  
-        <h2>Lista de Remédios</h2>
-
-        <label for="filtro-data">Selecionar data: </label>
-        <input type="date" id="filtro-data">
-        <ul id="lista-remedios"></ul>
+        <div id="tela-historico" style="display: none;">
+            <h2>Histórico de Remédios</h2>
+            <div id="lista-historico"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>

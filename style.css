@@ -1,136 +1,217 @@
-/* Variáveis de tema */
 :root {
-    --bg: #f2f2f2;
-    --text: #000;
-    --card-bg: #fff;
-    --border: #eee;
-    --btn-bg: #28a745;
-    --btn-text: #fff;
-    --danger-bg: #dc3545;
-  }
-  
-  body.dark {
-    --bg: #121212;
-    --text: #e0e0e0;
-    --card-bg: #1e1e1e;
-    --border: #333;
-    --btn-bg: #006400;
-    --btn-text: #fff;
-    --danger-bg: #8b0000;
-  }
-  
-  body {
-    background: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
+  --bg: #f2e8e6;
+  --text: #333;
+  --card-bg: #fff;
+  --border: #ddd;
+  --btn-bg: #8f262b;
+  --btn-text: #fff;
+  --danger-bg: #a33c3c;
+  --input-bg: #fdf7f6;
+  --input-text: #333;
+  --primary-color: #b755b5;
+  --secondary-color: #cb7d74;
+  --highlight-color: #dfa196;
+}
+
+body.dark {
+  --bg: #1e1e1e;
+  --text: #f0f0f0;
+  --card-bg: #2b2b2b;
+  --border: #444;
+  --btn-bg: #a33c3c;
+  --btn-text: #fff;
+  --danger-bg: #8f262b;
+  --input-bg: #333;
+  --input-text: #e0e0e0;
+  --primary-color: #b755b5;
+  --secondary-color: #cb7d74;
+  --highlight-color: #dfa196;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+nav.menu {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 2px solid var(--border);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+nav.menu h2 {
+  margin: 0;
+  font-size: 1.6em;
+}
+
+nav.menu #theme-toggle {
+  position: absolute;
+  right: 20px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+nav.menu #theme-toggle:hover {
+  background-color: var(--highlight-color);
+  color: var(--text);
+}
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="time"],
+input[type="date"],
+select {
+  flex: 1;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--input-text);
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+input[type="date"] {
+  font-family: 'Arial', sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10h5v5H7z'/%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM5 20V9h14v11H5z'/%3E%3C/svg%3E");
+}
+
+input[type="text"]:focus,
+input[type="time"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: var(--highlight-color);
+  color: var(--text);
+}
+
+button.danger {
+  background-color: var(--danger-bg);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  font-size: 16px;
+}
+
+li:hover {
+  background-color: var(--secondary-color);
+  color: var(--card-bg);
+}
+
+li.tomado {
+  text-decoration: line-through;
+  color: gray;
+}
+
+#lista-historico h3 {
+  margin-top: 20px;
+  background-color: var(--secondary-color);
+  padding: 12px;
+  border-left: 6px solid var(--primary-color);
+  font-size: 18px;
+  color: var(--card-bg);
+}
+
+#lista-historico ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+#lista-historico li {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#lista-historico li span {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
   .container {
-    max-width: 500px;
-    margin: 40px auto;
-    background: var(--card-bg);
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
 
-  h1, h2, h3 {
-    text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"],
-  input[type="time"],
-  select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--card-bg);
-    color: var(--text);
-  }
-  
+  input,
+  select,
   button {
-    padding: 10px 15px;
-    border: none;
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    border-radius: 8px;
-    cursor: pointer;
+    font-size: 14px;
   }
-  
-  button:hover {
-    opacity: 0.9;
+
+  ul li {
+    font-size: 14px;
   }
-  
-  button.danger {
-    background-color: var(--danger-bg);
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  li {
-    padding: 10px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  li.tomado {
-    text-decoration: line-through;
-    color: gray;
-  }
-  
-  /* Estilo do switcher */
-  .theme-switcher {
-    text-align: right;
-    padding: 10px 20px;
-    background: var(--card-bg);
-  }
-  
-  #lista-historico h3 {
-    margin-top: 20px;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-left: 4px solid #2196f3;
-    font-size: 18px;
-  }
-  
-  #lista-historico ul {
-    list-style: none;
-    padding-left: 10px;
-    margin-bottom: 20px;
-  }
-  
-  #lista-historico li {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin-bottom: 6px;
-    padding: 8px;
-    border-radius: 5px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  #lista-historico li span {
-    flex: 1;
-  }
-  
-  #lista-historico li span::before {
-    content: "💊 ";
-  }
-  
+}
